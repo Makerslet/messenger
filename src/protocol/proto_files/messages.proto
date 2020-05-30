@@ -1,0 +1,19 @@
+syntax="proto2";
+package protocol;
+
+message text_message_request
+{
+	required string sender = 1;
+	required string receiver = 2;
+	required string content = 3;
+}
+
+message text_message_response
+{
+	enum status {
+		RECEIVED = 1;
+		USER_NOT_AVAILABLE = 2;
+	}
+	
+	required status stat = 1;
+}

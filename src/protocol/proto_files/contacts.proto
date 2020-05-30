@@ -1,0 +1,64 @@
+syntax="proto2";
+package protocol;
+
+message find_user_request
+{
+	required string user = 1;
+}
+
+message find_user_response
+{
+	repeated string users = 1;
+}
+
+message add_contacts_request
+{
+	repeated string user = 1;
+}
+
+message add_contacts_response
+{
+	enum add_result_status
+	{
+		OK = 1;
+		DOESNT_EXISTS = 2;
+	}
+	
+	message add_result
+	{
+		required string user = 1;
+		required add_result_status status = 2;
+	}
+
+	repeated add_result results = 1;
+}
+
+message remove_contacts_request
+{
+	repeated string user = 1;
+}
+
+message remove_contacts_response
+{
+	enum remove_result_status
+	{
+		OK = 1;
+		DOESNT_EXISTS = 2;
+	}
+	
+	message remove_result
+	{
+		required string user = 1;
+		required remove_result_status status = 2;
+	}
+
+	repeated remove_result results = 1;
+}
+
+message contacts_list_request
+{}
+
+message contacts_list_response
+{
+	repeated string users = 1;
+}

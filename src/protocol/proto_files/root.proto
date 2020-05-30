@@ -1,0 +1,82 @@
+syntax="proto2";
+package protocol;
+
+import "control.proto";
+import "users.proto";
+import "contacts.proto";
+import "messages.proto";
+
+message root_message {
+
+    enum message_type {
+		// Команда установки соединения
+        HANDSHAKE_REQUEST	= 1;
+        HANDSHAKE_RESPONSE	= 2;
+
+		// Эхо команда проверки связи
+		ECHO_REQUEST	= 3;
+		ECHO_RESPONSE	= 4;
+
+		// Управление пользователями
+        CREATE_USER_REQUEST		= 10;
+        CREATE_USER_RESPONSE	= 11;
+		DELETE_USER_REQUEST		= 12;
+		DELETE_USER_RESPONSE	= 13;
+		LOGIN_REQUEST			= 14;
+		LOGIN_RESPONSE			= 15;
+		LOGOUT_REQUEST			= 16;
+		LOGOUT_RESPONSE			= 17;
+		USER_STATUS_REQUEST		= 18;
+		USER_STATUS_RESPONSE	= 19;
+
+		// Уведомления о пользователях
+		USER_DELETED_INFO = 20;
+
+		// Поиск пользователей и модификация списка контактов
+		FIND_USER_REQUEST			= 30;
+		FIND_USER_RESPONSE			= 31;
+		ADD_CONTACTS_REQUEST		= 32;
+		ADD_CONTACTS_RESPONSE		= 33;
+		REMOVE_CONTACTS_REQUEST		= 34;
+		REMOVE_CONTACTS_RESPONSE	= 35;
+		CONTACTS_LIST_REQUEST		= 36;
+		CONTACTS_LIST_RESPONSE		= 37;
+
+		// Отправка текстовых сообщений
+		TEXT_MESSAGE_REQUEST    = 40;
+		TEXT_MESSAGE_RESPONSE   = 41;
+	}
+
+	required message_type type	= 1;
+	required uint64 id			= 2;
+
+	optional handshake_request  handshake_req	= 10; // HANDSHAKE_REQUEST
+	optional handshake_response handshake_resp	= 11; // HANDSHAKE_RESPONSE
+
+	optional echo_request  echo_req		= 12; // ECHO_REQUEST
+	optional echo_response echo_resp	= 13; // ECHO_RESPONSE
+
+	optional create_user_request  	create_user_req		= 20; // CREATE_USER_REQUEST
+	optional create_user_response 	create_user_resp	= 21; // CREATE_USER_RESPONSE
+	optional delete_user_request  	delete_user_req		= 22; // DELETE_USER_REQUEST
+	optional delete_user_response 	delete_user_resp	= 23; // DELETE_USER_RESPONSE
+	optional login_request  		login_req			= 24; // LOGIN_REQUEST
+	optional login_response 		login_resp			= 25; // LOGIN_RESPONSE
+	optional logout_request  		logout_req			= 26; // LOGOUT_REQUEST
+	optional logout_response 		logout_resp			= 27; // LOGOUT_RESPONSE
+	optional user_status_request  	user_status_req		= 28; // USER_STATUS_REQUEST
+	optional user_status_response 	user_status_resp	= 29; // USER_STATUS_RESPONSE
+	optional user_deleted_info		user_deleted		= 30; // USER_DELETED_INFO
+
+	optional find_user_request			find_user_req			= 40; // FIND_USER_REQUEST
+	optional find_user_response			find_user_resp			= 41; // FIND_USER_RESPONSE
+	optional add_contacts_request		add_contacts_req		= 42; // ADD_CONTACTS_REQUEST
+	optional add_contacts_response		add_contacts_resp		= 43; // ADD_CONTACTS_RESPONSE
+	optional remove_contacts_request	remove_contacts_req		= 44; // REMOVE_CONTACTS_REQUEST
+	optional remove_contacts_response 	remove_contacts_resp	= 45; // REMOVE_CONTACTS_RESPONSE
+	optional contacts_list_request		contacts_list_req		= 46; // CONTACTS_LIST_REQUEST
+	optional contacts_list_response		contacts_list_resp		= 47; // CONTACTS_LIST_RESPONSE
+
+	optional text_message_request	text_message_req	= 50; // TEXT_MESSAGE_REQUEST
+	optional text_message_response 	text_message_resp	= 51; // TEXT_MESSAGE_RESPONSE
+}

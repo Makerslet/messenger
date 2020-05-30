@@ -1,0 +1,35 @@
+syntax="proto2";
+package protocol;
+
+message client_version_info
+{
+	required int32 protocol_version = 1;
+	required int32 client_version = 2;
+}
+
+message handshake_request
+{
+	required client_version_info info = 1;
+}
+
+message handshake_response
+{
+	enum handshake_result
+	{
+		DONE = 1;
+		UNSUPPORDED_CLIENT_VERSION = 2;
+		UNSUPPORTED_PROTOCOL_VERSION = 3;
+	}
+	required handshake_result result = 1;
+}
+
+message echo_request
+{
+	required string content = 1;
+}
+
+message echo_response
+{
+	required string content = 1;
+}
+
