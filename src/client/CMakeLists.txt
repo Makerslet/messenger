@@ -9,8 +9,20 @@ set(INTERFACE_HDRS
     base/icontact_list.h
     base/ivalidator.h)
 
-add_executable(${TARGET} main.cpp
-    ${INTERFACE_HDRS})
+set(IMPL_HDRS
+    console_controller.h
+    read_callback_generator.h)
 
-target_include_directories(${TARGET} PRIVATE ${INTERFACE_HDRS})
+set(IMPL_SRCS
+    console_controller.cpp
+    read_callback_generator.cpp)
+
+add_executable(${TARGET}
+    main.cpp
+    ${INTERFACE_HDRS}
+    ${IMPL_HDRS}
+    ${IMPL_SRCS})
+
+target_include_directories(${TARGET} INTERFACE ${INTERFACE_HDRS})
+target_include_directories(${TARGET} PRIVATE ${IMPL_HDRS})
 target_link_libraries(${TARGET} PUBLIC protocol_lib)

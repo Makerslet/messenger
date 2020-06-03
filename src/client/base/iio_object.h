@@ -13,7 +13,7 @@ class iio_object
 public:
     virtual ~iio_object() = default;
     virtual void read_async(read_lambda) = 0;
-    virtual void write_async(std::string&&) = 0;
+    virtual void write_async(const std::string&) = 0;
 };
 
 }
